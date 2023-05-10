@@ -1,4 +1,4 @@
-# Dizajni-dhe-Analiza-e-Algoritmave
+#Design and Analysis of Algorithms
 
 <h1>Rubik's Cube Solver</h1>					
 
