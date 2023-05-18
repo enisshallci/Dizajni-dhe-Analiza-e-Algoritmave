@@ -119,3 +119,69 @@ def ida(start):
                 branching_factors.append(b)
 
         cost_limit = minimum
+def manhattan_distance(cube, i, z, corner):
+    c1 = array[i, z]
+    center = None
+    for c in [1, 4, 7, 10, 13, 16]:
+        if cube[i, z] == cube[c, 1]:
+            center = c
+            break
+
+    if corner:
+        c2 = array[center - 1, 0]
+        d1 = abs(c1[0] - c2[0]) + abs(c1[1] - c2[1]) + abs(c1[2] - c2[2])
+        c2 = array[center - 1, 2]
+        d2 = abs(c1[0] - c2[0]) + abs(c1[1] - c2[1]) + abs(c1[2] - c2[2])
+        c2 = array[center + 1, 0]
+        d3 = abs(c1[0] - c2[0]) + abs(c1[1] - c2[1]) + abs(c1[2] - c2[2])
+        c2 = array[center + 1, 2]
+        d4 = abs(c1[0] - c2[0]) + abs(c1[1] - c2[1]) + abs(c1[2] - c2[2])
+        return min(d1, d2, d3, d4)
+    else:
+        c2 = array[center - 1, 1]
+        d1 = abs(c1[0] - c2[0]) + abs(c1[1] - c2[1]) + abs(c1[2] - c2[2])
+        c2 = array[center, 0]
+        d2 = abs(c1[0] - c2[0]) + abs(c1[1] - c2[1]) + abs(c1[2] - c2[2])
+        c2 = array[center, 2]
+        d3 = abs(c1[0] - c2[0]) + abs(c1[1] - c2[1]) + abs(c1[2] - c2[2])
+        c2 = array[center + 1, 1]
+        d4 = abs(c1[0] - c2[0]) + abs(c1[1] - c2[1]) + abs(c1[2] - c2[2])
+        return min(d1, d2, d3, d4)
+
+
+def corner_edge_sum_max(cube):
+    corners = 0
+    edges = 0
+    for i in range(18):
+        if i % 3 == 0 or i % 3 == 2:
+            corners = corners + manhattan_distance(cube, i, 0, True) + manhattan_distance(cube, i, 2, True)
+            edges = edges + manhattan_distance(cube, i, 1, False)
+        else:
+            edges = edges + manhattan_distance(cube, i, 0, False) + manhattan_distance(cube, i, 2, False)
+    return max(corners / 12, edges / 8)
+
+
+curr = State()
+curr.cube = np.array(xInitial)
+handle = open('input.txt')
+indexes = [0, 1, 2, 3, 6, 9, 12, 4, 7, 10, 13, 5, 8, 11, 14, 15, 16, 17]
+index = 0
+for line in handle:
+    line = line.replace(' ', '')
+    for row in line.split('['):
+        if len(row) != 0:
+            i = indexes[index]
+            curr.cube[i, 0] = row[1]
+            curr.cube[i, 1] = row[4]
+            curr.cube[i, 2] = row[7]
+            index = index + 1
+
+time.ctime()
+fmt = '%H:%M:%S'
+start = time.strftime(fmt)
+
+ida(curr)
+
+time.ctime()
+end = time.strftime(fmt)
+print("Time taken(sec):", datetime.strptime(end, fmt) - datetime.strptime(start, fmt))
