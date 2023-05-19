@@ -75,7 +75,7 @@ def idfs(start):
                 print("Nodes Generated:", nodes)
                 return
 
- if curr.cost + 1 <= cost_limit:
+            if curr.cost + 1 <= cost_limit:
                 child_cost = curr.cost + 1
                 b = 0
                 for i in range(12):
