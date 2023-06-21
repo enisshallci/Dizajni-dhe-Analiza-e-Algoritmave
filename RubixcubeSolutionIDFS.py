@@ -3,7 +3,6 @@ import numpy as np
 from datetime import datetime
 import time
 
-
 class State:
     cube = None
     cost = 0
@@ -45,7 +44,7 @@ def contains1(child, parent):
     return False
 
 
-# checks if frontier contains child
+# checks if  child state is present in frontier
 def contains2(child, frontier):
     for curr in frontier:
         if np.array_equal(curr.cube, child): return True
@@ -92,47 +91,44 @@ def idfs(start):
                     b = b + 1
                 branching_factors.append(b)
 
-        branching_factors.clear()
         cost_limit = cost_limit + 1
 
+# def manhattan_distance(cube, i, z, corner):
+#     x = i / 3
+#     y = i % 3
+#     center = None
+#     for c in [1, 4, 7, 10, 13, 16]:
+#         if cube[i, z] == cube[c, 1]:
+#             center = c
+#             break
+#
+#     if corner:
+#         d1 = abs((center - 1) / 3 - x) + abs((center - 1) % 3 - y) + abs(z - 0)
+#         d2 = abs((center - 1) / 3 - x) + abs((center - 1) % 3 - y) + abs(z - 2)
+#         d3 = abs((center + 1) / 3 - x) + abs((center + 1) % 3 - y) + abs(z - 0)
+#         d4 = abs((center + 1) / 3 - x) + abs((center + 1) % 3 - y) + abs(z - 2)
+#         return min(d1, d2, d3, d4)
+#     else:
+#         d1 = abs((center - 1) / 3 - x) + abs((center - 1) % 3 - y) + abs(z - 1)
+#         d2 = abs(center / 3 - x) + abs(center % 3 - y) + abs(z - 0)
+#         d3 = abs(center / 3 - x) + abs(center % 3 - y) + abs(z - 2)
+#         d4 = abs((center + 1) / 3 - x) + abs((center + 1) % 3 - y) + abs(z - 1)
+#         return min(d1, d2, d3, d4)
+#
+#
+# def corner_edge_sum_max(cube):
+#     corners = 0
+#     edges = 0
+#     for i in range(18):
+#         if i % 3 == 0 or i % 3 == 2:
+#             corners = corners + manhattan_distance(cube, i, 0, True) + manhattan_distance(cube, i, 2, True)
+#             edges = edges + manhattan_distance(cube, i, 1, False)
+#         else:
+#             edges = edges + manhattan_distance(cube, i, 0, False) + manhattan_distance(cube, i, 2, False)
+#     return max(corners / 4, edges / 4)
 
-def manhattan_distance(cube, i, z, corner):
-    x = i / 3
-    y = i % 3
-    center = None
-    for c in [1, 4, 7, 10, 13, 16]:
-        if cube[i, z] == cube[c, 1]:
-            center = c
-            break
 
-    if corner:
-        d1 = abs((center - 1) / 3 - x) + abs((center - 1) % 3 - y) + abs(z - 0)
-        d2 = abs((center - 1) / 3 - x) + abs((center - 1) % 3 - y) + abs(z - 2)
-        d3 = abs((center + 1) / 3 - x) + abs((center + 1) % 3 - y) + abs(z - 0)
-        d4 = abs((center + 1) / 3 - x) + abs((center + 1) % 3 - y) + abs(z - 2)
-        return min(d1, d2, d3, d4)
-    else:
-        d1 = abs((center - 1) / 3 - x) + abs((center - 1) % 3 - y) + abs(z - 1)
-        d2 = abs(center / 3 - x) + abs(center % 3 - y) + abs(z - 0)
-        d3 = abs(center / 3 - x) + abs(center % 3 - y) + abs(z - 2)
-        d4 = abs((center + 1) / 3 - x) + abs((center + 1) % 3 - y) + abs(z - 1)
-        return min(d1, d2, d3, d4)
-
-
-def corner_edge_sum_max(cube):
-    corners = 0
-    edges = 0
-    for i in range(18):
-        if i % 3 == 0 or i % 3 == 2:
-            corners = corners + manhattan_distance(cube, i, 0, True) + manhattan_distance(cube, i, 2, True)
-            edges = edges + manhattan_distance(cube, i, 1, False)
-        else:
-            edges = edges + manhattan_distance(cube, i, 0, False) + manhattan_distance(cube, i, 2, False)
-    return max(corners / 4, edges / 4)
-
-
-##########################################
-
+########################################################################################################################
 
 curr = State()
 curr.cube = np.array(xInitial)
