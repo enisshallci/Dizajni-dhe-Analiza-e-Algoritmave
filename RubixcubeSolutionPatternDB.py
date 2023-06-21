@@ -4,7 +4,7 @@ from datetime import datetime
 import time
 import sqlite3
 
-
+#SE PARI BENI RUN "CreateDB" pastaj kete fajll!!
 db = dict()
 
 def get_corner_string(cube):
