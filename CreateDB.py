@@ -17,7 +17,7 @@ def get_corner_string(cube):
     return string
 
 
-
+########################################################################################################################
 db = dict()
 front = list()
 goal = St()
@@ -34,9 +34,6 @@ while len(front) != 0:
             new.cube = np.array(curr.cube)
             new.cost = child_cost
             make_move(new.cube, i + 1, 0)
-            # if cost < child_cost:
-            #    cost = child_cost
-            #    print(cost)
             string = get_corner_string(new.cube)
             if string not in db.keys():
                 db[string] = new.cost
@@ -48,9 +45,9 @@ try:
     conn = sqlite3.connect('corners.db')
     cursor = conn.cursor()
     cursor.execute('CREATE TABLE CornerValue(Corners VARCHAR, Value INT)')
-    print(sqlite3.version)
     cursor.executemany('INSERT INTO CornerValue(Corners, Value) VALUES (?, ?)', db.items())
     conn.commit()
+
 except Error as e:
     print(e, 'error occurred')
 finally:
