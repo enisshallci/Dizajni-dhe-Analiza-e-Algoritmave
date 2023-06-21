@@ -95,6 +95,7 @@ def ida(start):
                 #        print(curr.move)
                 #    curr = curr.parent
                 print("Nodes Generated:", nodes)
+
                 return
 
             b = 0
@@ -158,9 +159,9 @@ def corner_edge_sum_max(cube):
             edges = edges + manhattan_distance(cube, i, 1, False)
         else:
             edges = edges + manhattan_distance(cube, i, 0, False) + manhattan_distance(cube, i, 2, False)
-    return max(corners / 12, edges / 8)
+    return max(corners / 8, edges / 12)
 
-
+########################################################################################################################
 curr = State()
 curr.cube = np.array(xInitial)
 handle = open('input.txt')
