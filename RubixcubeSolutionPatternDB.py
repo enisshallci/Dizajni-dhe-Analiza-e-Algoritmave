@@ -7,7 +7,6 @@ import sqlite3
 
 db = dict()
 
-
 def get_corner_string(cube):
     string = ''
     for i in range(18):
@@ -96,6 +95,8 @@ def ida(start):
                 #        print(curr.move)
                 #    curr = curr.parent
                 print("Nodes Generated:", nodes)
+                print(minimum)
+                print(cost_limit)
                 return
 
             b = 0
@@ -121,15 +122,12 @@ def ida(start):
 
         cost_limit = minimum
 
-
 def heuristic(cube):
     a = db[get_corner_string(cube)]
     return a
 
 
-###################################################
-
-
+########################################################################################################################
 curr = State()
 curr.cube = np.array(xInitial)
 handle = open('input.txt')
@@ -145,13 +143,14 @@ for line in handle:
             curr.cube[i, 2] = row[7]
             index = index + 1
 
-
 get_db()
+
 time.ctime()
 fmt = '%H:%M:%S'
 start = time.strftime(fmt)
 
 print(heuristic(xInitial))
+
 ida(curr)
 
 time.ctime()
