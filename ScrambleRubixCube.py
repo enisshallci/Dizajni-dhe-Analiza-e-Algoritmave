@@ -132,18 +132,6 @@ def BackACW(x):  # action 12
     BackCW(x)
 
 
-def PrintCube(x):
-    print("             ", x[0, 0:3])
-    print("             ", x[1, 0:3])
-    print("             ", x[2, 0:3])
-    print(x[3, 0:3], x[6, 0:3], x[9, 0:3], x[12, 0:3])
-    print(x[4, 0:3], x[7, 0:3], x[10, 0:3], x[13, 0:3])
-    print(x[5, 0:3], x[8, 0:3], x[11, 0:3], x[14, 0:3])
-    print("             ", x[15, 0:3])
-    print("             ", x[16, 0:3])
-    print("             ", x[17, 0:3])
-
-
 def make_move(x, move, reverse):
     # move number
     # reverse if 0 original move if 1 reverse of input move
