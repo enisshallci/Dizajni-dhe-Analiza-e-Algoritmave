@@ -1,4 +1,4 @@
-from ScrambleRubixcube import xInitial, make_move
+from ScrambleRubixCube import xInitial, make_move
 import numpy as np
 from datetime import datetime
 import time
